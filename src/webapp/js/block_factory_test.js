@@ -63,6 +63,18 @@ function init() {
     scene.add( plane );
 
 
+    var material = Config.BOX_MATERIAL;
+
+    var shape = [
+        [[true,true,true],[false,false,false],[false,false,false]],
+        [[true,false,false],[false,false,false],[false,false,false]],
+        [[true,false,false],[false,false,false],[false,false,false]]
+    ];
+
+    mesh = BlockFactory.make(shape, material);
+    //mesh.rotateZ(Math.PI / 2);
+    scene.add(mesh);
+
     // VALOJA:
 
     var light = new THREE.AmbientLight( 0x404040 ); // soft white light
