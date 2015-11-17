@@ -10,7 +10,7 @@ var geometry, material, mesh;
 var plane;
 
 init();
-//animate();
+animate();
 
 document.addEventListener("keydown", keyDownHandler, false);
 
@@ -77,9 +77,35 @@ function init() {
     material = new THREE.MeshPhongMaterial( {color: 0xff0000 } );
 
     // MESH on peruskäsite kappaleelle, jolla on muoto ja pintamateriaali
-    // liitetään mesh näkymään (scene)
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    // mesh pitää liittää näkymään (scene)
+    // esimerkiksi:
+    // mesh = new THREE.Mesh( geometry, material );
+    // scene.add( mesh );
+
+
+    // Aloitetaan isomman mesh-kappaleen kokoaminen!
+    // luodaan ensin mesh-lista, jonne lisätään kuutionmallisia mesh-kappaleita
+    var meshes = [];
+    var box;
+    
+    // luodaan box, lisätään se listaan
+    box = new THREE.Mesh(geometry, material);
+    meshes.push(box);
+
+    // luodaan uusi box, lisätään sekin listaan
+    box = new THREE.Mesh(geometry, material);
+    box.position.x = 25;
+    meshes.push(box);
+
+    box = new THREE.Mesh(geometry, material);
+    box.position.y = 25;
+    meshes.push(box);    
+
+    // luodaan uusi geometrinen muoto, joka tulee olemaan kahden yhteenliitetyn kuution muotoinen
+    // tehdään muodon pohjalta mesh ja liitetään se näkymään
+    mergeGeometry = mergeMeshes(meshes);
+    mesh = new THREE.Mesh(mergeGeometry, material);
+    scene.add(mesh);
 
 
     // LUODAAN TASO
@@ -112,10 +138,10 @@ function init() {
 
     // tehdään renderöinti-ikkuna
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
     // liitetään ikkuna bodyyn
-    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(renderer.domElement);
 
 }
 
