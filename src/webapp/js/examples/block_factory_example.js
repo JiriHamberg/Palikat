@@ -75,6 +75,30 @@ function init() {
     //mesh.rotateZ(Math.PI / 2);
     scene.add(mesh);
 
+    var newShape = shape;
+    
+    for(var i=1; i<=4; i++) {
+        newShape = Shapes.rotateX(newShape);
+        var newMesh = BlockFactory.make(newShape, material);
+        newMesh.position.x += i * 100;
+        scene.add(newMesh);
+    }
+
+    for(var i=1; i<=4; i++) {
+        newShape = Shapes.rotateY(newShape);
+        var newMesh = BlockFactory.make(newShape, material);
+        newMesh.position.y += i * 100;
+        newMesh.position.x -= 100;
+        scene.add(newMesh);
+    }
+
+    for(var i=1; i<=4; i++) {
+        newShape = Shapes.rotateZ(newShape);
+        var newMesh = BlockFactory.make(newShape, material);
+        newMesh.position.z -= i * 100;
+        scene.add(newMesh);
+    }
+
     // VALOJA:
 
     var light = new THREE.AmbientLight( 0x404040 ); // soft white light
