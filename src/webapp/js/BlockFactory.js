@@ -28,6 +28,7 @@ var BlockFactory = (function() {
 	    	for(var j = 0; j < matrix[i].length; j++) {
 	    		for(var k = 0; k < matrix[i][j].length; k++) {
 	    			if(matrix[i][j][k]) {
+	    				box = new THREE.Mesh(Config.BOX_GEOMETRY, material);
 		    			box.position.x = i * Config.UNIT_LENGTH;
 		    			box.position.y = j * Config.UNIT_LENGTH;
 		    			box.position.z = k * Config.UNIT_LENGTH;
