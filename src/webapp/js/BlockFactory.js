@@ -27,10 +27,12 @@ var BlockFactory = (function() {
 	    for(var i = 0; i < matrix.length; i++) {
 	    	for(var j = 0; j < matrix[i].length; j++) {
 	    		for(var k = 0; k < matrix[i][j].length; k++) {
-	    			box.position.x = i * Config.UNIT_LENGTH;
-	    			box.position.y = j * Config.UNIT_LENGTH;
-	    			box.position.z = k * Config.UNIT_LENGTH;
-	    			meshes.push(box);
+	    			if(matrix[i][j][k]) {
+		    			box.position.x = i * Config.UNIT_LENGTH;
+		    			box.position.y = j * Config.UNIT_LENGTH;
+		    			box.position.z = k * Config.UNIT_LENGTH;
+		    			meshes.push(box);
+		    		}
 	    		}
 	    	}
 	    }   
