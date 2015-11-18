@@ -58,7 +58,7 @@ function init() {
     plane = new THREE.Mesh( planeGeometry, planeMaterial );
     // käännetään taso vaakasuoraan
     plane.rotateX(Math.PI / 2.0);
-    plane.position.y = 0;
+    plane.position.y -= Config.UNIT_LENGTH / 2.0;
     // lisätään taso näkymään
     scene.add( plane );
 
