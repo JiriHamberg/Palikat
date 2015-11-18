@@ -49,7 +49,7 @@ var Sprites = (function() {
 		for(var i = xMin; i < xMax; i++ ) {
 			intersectionShape.push([]);
 			for(var j = yMin; j < yMax; j++) {
-				intersectionShape[i].push([]);
+				intersectionShape[i - xMin].push([]);
 				for(var k = zMin; k < zMax; k++) {
 					var isec = this.shape[i - this.x][j - this.y][k - this.z] && other.shape[i - other.x][j - other.y][k - other.z];
 					anyIntersect = anyIntersect || isec;

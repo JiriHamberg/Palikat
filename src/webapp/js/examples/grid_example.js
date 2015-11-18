@@ -1,7 +1,8 @@
 
 var scene, camera, renderer;
-var geometry, material, mesh;
 var plane;
+
+var grid;
 
 init();
 animate();
@@ -13,25 +14,26 @@ function keyDownHandler(event) {
     console.log(keyCode);
     switch(keyCode) {
         case 38: //up
-            mesh.position.y += 10;
+            //mesh.position.y += 10;
+            grid.moveActive(0, 1, 0);
             break;
         case 39: //right
-            mesh.position.x += 10;
+            grid.moveActive(1, 0, 0);
             break;
         case 37: //left
-            mesh.position.x -= 10;
+            grid.moveActive(-1, 0, 0);
             break;
         case 40: //down
             if( mesh.position.y <= 0 ) {
                 return;
             }
-            mesh.position.y -= 10;
+            grid.moveActive(0, -1, 0);
             break;
         case 65: //a
-            mesh.position.z += 10;
+            grid.moveActive(0, 0, 1);
             break;
         case 87: //w
-            mesh.position.z -= 10;
+            grid.moveActive(0,0,-1);
             break;
     }
 }
@@ -40,6 +42,7 @@ function keyDownHandler(event) {
 
 function init() {
 
+    grid = new Grid.Grid();
     // luodaan näkymä, johon liitetään myöhemmin kaikki palikat yms.
     scene = new THREE.Scene();
 
@@ -71,32 +74,38 @@ function init() {
         [[true,false,false],[false,false,false],[false,false,false]]
     ];
 
-    mesh = BlockFactory.make(shape, material);
-    //mesh.rotateZ(Math.PI / 2);
+    mesh = MeshFactory.make(shape, material);
+
+    grid.setActive(new Blocks.Block(new Sprites.Sprite(0, 0, 0, shape), mesh));
+
     scene.add(mesh);
+
+
 
     var newShape = shape;
     
     for(var i=1; i<=4; i++) {
         newShape = Shapes.rotateX(newShape);
-        var newMesh = BlockFactory.make(newShape, material);
-        newMesh.position.x += i * 100;
+        var newMesh = MeshFactory.make(newShape, material);
+        var sprite = new Sprites.Sprite(4 * i, 0, 0, newShape );
         scene.add(newMesh);
+        grid.addBlock(new Blocks.Block(sprite, newMesh));
     }
 
     for(var i=1; i<=4; i++) {
         newShape = Shapes.rotateY(newShape);
-        var newMesh = BlockFactory.make(newShape, material);
-        newMesh.position.y += i * 100;
-        newMesh.position.x -= 100;
+        var newMesh = MeshFactory.make(newShape, material);
+        var sprite = new Sprites.Sprite(4, 4 * i, 0, newShape );
         scene.add(newMesh);
+        grid.addBlock(new Blocks.Block(sprite, newMesh));
     }
 
     for(var i=1; i<=4; i++) {
         newShape = Shapes.rotateZ(newShape);
-        var newMesh = BlockFactory.make(newShape, material);
-        newMesh.position.z -= i * 100;
+        var newMesh = MeshFactory.make(newShape, material);
+        var sprite = new Sprites.Sprite(0, 0, 4 * i, newShape );
         scene.add(newMesh);
+        grid.addBlock(new Blocks.Block(sprite, newMesh));
     }
 
     // VALOJA:
@@ -114,7 +123,7 @@ function init() {
 
     // tehdään renderöinti-ikkuna
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(0.9 * window.innerWidth, 0.9 * window.innerHeight);
 
     // liitetään ikkuna bodyyn
     document.body.appendChild(renderer.domElement);

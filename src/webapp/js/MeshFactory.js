@@ -1,6 +1,6 @@
 
 
-var BlockFactory = (function() {
+var MeshFactory = (function() {
 
 
 	// tekee palikan 3D-mallin (matriisin, engl. matrix) mukaan
