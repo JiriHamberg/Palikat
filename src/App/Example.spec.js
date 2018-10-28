@@ -1,11 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import Example from './Example';
 
+// https://airbnb.io/enzyme/docs/api/shallow.html
+
 describe('Example', () => {
-    it('renders without crashing', () => {
-        const div = document.createElement('div');
-        ReactDOM.render(<Example />, div);
-        ReactDOM.unmountComponentAtNode(div);
-      });
+    let component;
+    let props;
+
+    beforeEach(() => {
+        props = {
+            color: '#000000',
+            text: 'testing'
+        }
+        component = shallow(<Example { ...props } />);
+    });
+
+    it('should render text', () => {
+        expect(component.find('Text').text()).toEqual(props.text);
+    });
 });
