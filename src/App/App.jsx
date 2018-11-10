@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Example from './Example';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// normally the component assosiated to a route should be an independent container component
-const renderExample = () => <Example text="This is an example." />;
+import { RotatingCube } from './Scenes';
 
 class App extends Component {
 	render() {
 		return (
 			<Router>
-				<div>
-					<Route exact path="/" component={ renderExample } />
-				</div>
+				<Switch>
+					<Route path="/" component={ RotatingCube } />
+				</Switch>
 			</Router>
-    );
+		);
 	}
 }
 
