@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { RotatingCube } from './Scenes'
 
-import { RotatingCube } from './Scenes';
-
-class App extends Component {
-	render() {
-		return (
-			<Router>
-				<Switch>
-					<Route path="/" component={ RotatingCube } />
-				</Switch>
-			</Router>
-		);
-	}
+class App extends React.Component {
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/" component={ RotatingCube } />
+                </Switch>
+            </Router>
+        )
+    }
 }
 
-export default App;
+export default App
