@@ -11,13 +11,13 @@ class BlockGrid {
 	}
 
 	setActive(blockModel) {
-        const index = this.blocks.indexOf(blockModel)
+        const index = this.blockModels.indexOf(blockModel)
         
         if(index < 0) {
             throw "BlockGrid::setActive: blockModel must be added before activating. Call addBlockModel first"
         }
 
-        this.activeBlock = blockModels[index]
+        this.activeBlock = this.blockModels[index]
 	}
 
 	moveActive(dx, dy, dz) {
@@ -31,42 +31,38 @@ class BlockGrid {
 
 	rotateActiveX() {
 		if(this.activeBlock === null) {
-			throw "BlockGrid::moveActive: active blockModel is null. Call setActive first"
+			throw "BlockGrid::roteteActiveX: active blockModel is null. Call setActive first"
 		}
 
 		this.activeBlock.rotateX()
 		resolveCollisions(this.activeBlock, this.blockModels)
 	}
 
+    rotateActiveY() {
+		if(this.activeBlock === null) {
+			throw "BlockGrid::roteteActiveY: active blockModel is null. Call setActive first"
+		}
+
+		this.activeBlock.rotateY()
+		resolveCollisions(this.activeBlock, this.blockModels)
+    }
+    
+    rotateActiveZ() {
+		if(this.activeBlock === null) {
+			throw "BlockGrid::roteteActiveZ: active blockModel is null. Call setActive first"
+		}
+
+		this.activeBlock.rotateZ()
+		resolveCollisions(this.activeBlock, this.blockModels)
+	}
+
+
+
 	unactivateActive() {
 		this.active = null
-	}
-
-	// jos aktiivinen block törmää listan blockeihin, blockia liikutetaan ylöspäin,
-	// kunnes se ei törmää siihen blockiin tai mihinkään muuhun blockiin, joka
-	// vaika sattuu lepäämään kyseisen blockin päällä
-	/*resolveCollisions() {
-		while(collidesAny(active, blocks)) {
-			active.move(0, 1, 0);
-		}
-	}
-
-	// palauta true, jos aktiivinen törmää yhteenkään palikoista
-	collidesAny(active, blocks) {
-		for(var i=0; i<blocks.length; i++) {
-			if(active.sprite.intersection(blocks[i].sprite) !== null) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	return {
-		Grid: Grid
-	};*/
-
+    }
+    
 }
-
 
 const collidesAny = (activeBlock, blockModels) => {
     for(let i=0; i<blockModels.length; i++) {
@@ -85,8 +81,8 @@ const collidesAny = (activeBlock, blockModels) => {
 }
 
 const resolveCollisions = (activeBlock, blockModels) => {
-    while(collidesAny(active, blocks)) {
-        active.move(0, 1, 0)
+    while(collidesAny(activeBlock, blockModels)) {
+        activeBlock.move(0, 1, 0)
     }
 }
 

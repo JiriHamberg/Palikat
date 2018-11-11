@@ -6,6 +6,8 @@ class RotatingCubeScene extends ThreeScene {
 
     init() {
         super.init()
+        
+        this.paused = false
 
         this.camera = this.getPerspectiveCamera()
         this.camera.position.z = 4
@@ -20,9 +22,19 @@ class RotatingCubeScene extends ThreeScene {
         this.scene.add( light );
     }
 
-    update() {
-        this.cube.rotation.x += 0.01
-        this.cube.rotation.y += 0.01
+    update(deltaTime) {
+        if(this.paused) {
+            return
+        }
+
+        this.cube.rotation.x += 1 * deltaTime
+        this.cube.rotation.y += 1 * deltaTime
+    }
+
+    onKeyDown(key) {
+        if(key === ' ') {
+            this.paused = !this.paused
+        }
     }
 
 }

@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 import Config from './Config';
 
 
@@ -36,4 +38,4 @@ class MeshFactory {
 
 }
 
-export default MesgFactory
+export default MeshFactory

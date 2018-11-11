@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 
 const UNIT_LENGTH = 25
 const DEFAULT_MATERIAL = new THREE.MeshPhongMaterial( { color: 0xff0000 } )

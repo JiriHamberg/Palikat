@@ -7,13 +7,18 @@ class ThreeWrapper extends Component {
     this.props.scene.start()
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.scene.stop()
+  }
+
+  onKeyDown = (event) => {
+    event.preventDefault()
+    this.props.scene.onKeyDown(event.key)
   }
 
   render() {
     return(
-      <div ref={(node) => {this.node = node}} />
+      <div ref={(node) => {this.node = node}} onKeyDown={this.onKeyDown} tabIndex="0" />
     )
   }
 }

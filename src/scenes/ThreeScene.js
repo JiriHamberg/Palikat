@@ -14,9 +14,15 @@ class ThreeScene {
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.setClearColor('#000000')
     this.renderer.setSize(this.width, this.height)
+
+    this.lastUpdated = new Date()
   }
 
-  update() {
+  update(timeDelta) {
+    //for child classes
+  }
+
+  onKeyDown(key) {
     //for child classes
   }
 
@@ -31,7 +37,10 @@ class ThreeScene {
   }
 
   animate = () => {
-    this.update()
+    const now = new Date()
+    const timeDelta = (now.getTime() - this.lastUpdated.getTime()) / 1000
+    this.update(timeDelta)
+    this.lastUpdated = now
 
     this.renderScene()
     this.frameId = window.requestAnimationFrame(this.animate)

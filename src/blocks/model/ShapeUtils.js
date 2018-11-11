@@ -2,7 +2,7 @@
 class Shapeutils {
 
     static rotateX(shape) {
-        const xLen = shape.length
+		const xLen = shape.length
 		const yLen = shape[0].length
 		const zLen = shape[0][0].length
 
@@ -32,7 +32,7 @@ class Shapeutils {
 			for(let j=0; j<yLen; j++) {
 				newShape[i].push([])
 				for(let k=0; k<xLen; k++) {
-					newShape[i][j].push( shape[zLen - 1 - k][j][i] )
+					newShape[i][j].push( shape[xLen - 1 - k][j][zLen - 1 - i] )
 				}
 			}
 		}

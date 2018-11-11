@@ -1,4 +1,5 @@
 import Config from './Config';
+import ShapeUtils from './ShapeUtils';
 
 class BlockModel {
     constructor(sprite, mesh) {
@@ -12,17 +13,17 @@ class BlockModel {
 	}
 
     rotateX() {
-        this.sprite.shape = Shapes.rotateX(this.sprite.shape)
+        this.sprite.shape = ShapeUtils.rotateX(this.sprite.shape)
 		this.mesh.rotateX(Math.PI / 2)
     }
 
     rotateY() {
-        this.sprite.shape = Shapes.rotateY(this.sprite.shape)
+        this.sprite.shape = ShapeUtils.rotateY(this.sprite.shape)
 		this.mesh.rotateY(Math.PI / 2)
     }
 
     rotateZ() {
-        this.sprite.shape = Shapes.rotateZ(this.sprite.shape)
+        this.sprite.shape = ShapeUtils.rotateZ(this.sprite.shape)
 		this.mesh.rotateZ(Math.PI / 2)
     }
 
